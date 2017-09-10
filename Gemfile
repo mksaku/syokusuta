@@ -28,11 +28,12 @@ gem 'sdoc', '~> 0.4.0', group: :doc
 
 # Use Unicorn as the app server
 # gem 'unicorn'
-
+#
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
 
 group :development, :test do
+  gem 'dotenv-rails'
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug'
 
@@ -43,3 +44,20 @@ group :development, :test do
   gem 'spring'
 end
 
+gem 'twitter-bootstrap-rails'
+gem 'jquery-turbolinks'
+gem 'rails_12factor', group: :production
+gem 'devise'
+gem 'faker'
+group :development do
+  gem 'letter_opener_web'
+end
+gem 'rails_admin'
+gem 'cancan'
+gem 'pry-rails'
+  gem 'better_errors'
+  gem 'omniauth'
+gem 'omniauth-twitter'
+gem 'omniauth-facebook'
+gem 'carrierwave'
+gem 'mini_magick'

@@ -1,0 +1,44 @@
+<div class="container">
+  <div class="wrapper col-md-8 col-md-offset-2 col-sm-10">
+    <div class="header">
+    <p><%= notice %></p>
+
+
+      <%= link_to "新規投稿", new_up_path, class: 'btn btn-default' %>
+    </div>
+    <br>
+    <% @ups.each do |photo| %>
+
+    <div class="row">
+
+        <div class="pull-left">
+           <%= profile_img(photo.user) %>
+           <p><%= photo.user.name %></p>
+
+        </div>
+      <h4><div class="pull-left"><p><%= photo.content %></p></div></h4>
+
+
+      <p class="post-image"><%= image_tag(photo.photo) %></p>
+      <div class="pull-left"><p><%= photo.content %></p></div>
+      <br>
+      <br>
+      <%= link_to "編集", edit_up_path(photo.id), class: 'btn btn-default btn-sm btn-success' %>
+      <%= link_to "削除", up_path(photo.id), method: :delete, data: { confirm: '本当に削除していいですか？'}, class: 'btn btn-default btn-sm btn btn-danger' %>
+
+    </div>
+    <br>
+    <br>
+<% end %>
+
+</div>
+</div>
+<div id="page-top-btn" class="page-top-btn">
+ <p><a class="move-page-top" id="move-page-top">▲</a></p>
+</div>
+
+<br>
+<br>
+<br>
+<br>
+<br>
