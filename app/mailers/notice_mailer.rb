@@ -9,6 +9,6 @@ class NoticeMailer < ApplicationMailer
     @photo = photo
 
     mail to: "to@example.org"
-    subject: '投稿されました'
+    subject:'投稿されました'
   end
 end
