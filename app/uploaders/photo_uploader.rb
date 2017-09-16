@@ -52,4 +52,6 @@ class PhotoUploader < CarrierWave::Uploader::Base
       # 1200x900にリサイズします
       process resize_to_limit: [50, 50]
 
+      end
+
 end
