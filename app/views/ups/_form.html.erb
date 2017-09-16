@@ -20,7 +20,7 @@
   <%= f.label :content %>
   <%= f.text_field :content, class: 'form-control' %>
 
-  <p class="post-image"><%= image_tag(@up.photo) , size: '50x50' %></p>
+  <p class="post-image"><%= image_tag(@up.photo) %></p>
   <%= f.label :写真 %>
   <%= f.file_field :photo %>
   <%= f.hidden_field :photo_cache %>
