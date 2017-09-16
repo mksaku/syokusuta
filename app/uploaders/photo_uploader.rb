@@ -46,12 +46,6 @@ class PhotoUploader < CarrierWave::Uploader::Base
   #   "something.jpg" if original_filename
   # end
 
-      # RMagickをincludeします
-      include CarrierWave::RMagick
 
-      # 1200x900にリサイズします
-      process resize_to_limit: [50, 50]
-
-      end
 
 end
