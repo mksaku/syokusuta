@@ -2,14 +2,15 @@ Rails.application.routes.draw do
 
 
 
+
+
   mount RailsAdmin::Engine => '/admin', as: 'rails_admin'
 
   #get 'ups/index'
  get 'ups' => 'ups#index'
-  resources :ups,only: [:index, :new, :create, :edit, :update ,:destroy] do
-    collection do
-      post :confirm
-    end
+  resources :ups do
+    resources :comments
+    post :confirm, on: :collection
   end
 
 

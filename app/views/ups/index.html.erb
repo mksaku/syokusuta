@@ -17,12 +17,16 @@
            <p><%= photo.user.name %></p>
 
         </div>
-      <h4><div class="pull-left"><p><%= photo.content %></p></div></h4>
+        <%= link_to up_path(photo.id) do %>
+       <h4><div class="pull-left"><p><%= photo.content %></p></div></h4>
+     <% end %>
+
 
 <br>
       <p class="post-image"><%= image_tag(photo.photo) %></p>
       <div class="pull-left"><p><%= photo.content %></p></div>
       <br>
+
       <br>
       <%= link_to "編集", edit_up_path(photo.id), class: 'btn btn-default btn-sm btn-success' %>
       <%= link_to "削除", up_path(photo.id), method: :delete, data: { confirm: '本当に削除していいですか？'}, class: 'btn btn-default btn-sm btn btn-danger' %>

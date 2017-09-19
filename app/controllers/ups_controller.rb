@@ -1,18 +1,31 @@
 class UpsController < ApplicationController
 
     before_action :authenticate_user!
-    before_action :set_up, only: [:edit, :update, :destroy]
+    before_action :set_up, only: [:edit, :update, :destroy, :show]
 
     def index
 
        if params[:back]
          @ups = Up.all
          @up = Up.new(ups_params)
-
+         respond_to do |format|
+           format.html
+           format.js
+         end
       else
         @ups = Up.all
         @up = Up.new
-      end
+        respond_to do |format|
+          format.html
+          format.js
+        end
+    end
+  end
+
+
+    def show
+       @comment = @up.comments.build
+       @comments = @up.comments
     end
 
     def new
