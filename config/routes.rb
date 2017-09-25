@@ -2,7 +2,9 @@ Rails.application.routes.draw do
 
 
 
+  get 'relationships/create'
 
+  get 'relationships/destroy'
 
   mount RailsAdmin::Engine => '/admin', as: 'rails_admin'
 
@@ -22,6 +24,8 @@ devise_for :users, controllers: {
     registrations: "users/registrations",
     omniauth_callbacks: "users/omniauth_callbacks"
 }
+resources :users
+resources :relationships
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 

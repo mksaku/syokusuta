@@ -1,0 +1,57 @@
+<p id="notice"><%= notice %></p>
+<div class="child row">
+  <div class="wrapper col-md-6 col-md-offset-3 col-sm-10 col-sm-offset-1">
+
+
+
+        <div class="row">
+
+
+
+                <div id="follow_form_<%= user.id %>">
+                <% unless current_user.following?(user) %>
+                  <%= form_for(current_user.relationships.build(followed_id: user.id), remote: true) do |f| %>
+                    <%= f.hidden_field :followed_id %>
+                    <%= f.submit "フォロー", class: "btn btn-large btn-primary" %>
+                  <% end %>
+                <% else %>
+                  <%= form_for(current_user.relationships.find_by(followed_id: user.id), html: { method: :delete }, remote: true) do |f| %>
+                     <%= f.submit "つながりを解除", class: "btn btn-large" %>
+                  <% end %>
+                <% end %>
+
+              </div>
+
+          <div class="col-md-6">
+
+
+    <h2>フォロー</h2>
+
+    <!--
+    followed_usersはrailsに元からあるメソッド
+    特定のユーザーからフォローしているユーザーを取得する
+    -->
+    <% user.followed_users.each do |follow_user| %>
+    <div class="photo">
+    <p><%= profile_img(follow_user) %></p>
+    <p><%= follow_user.name %></p>
+    </div>
+  <% end %>
+</div>
+
+    <div class="col-md-6">
+    <h2>フォロワー</h2>
+    <% user.followers.each do |followed_user| %>
+    <div class="photo">
+    <p><%= profile_img(followed_user) %></p>
+    <p><%= followed_user.name %></p>
+    </div>
+  <% end %>
+
+
+
+      </div>
+
+</div>
+</div>
+</div>
