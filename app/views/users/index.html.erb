@@ -7,7 +7,11 @@
         <p><%= user.name %></p>
         <% end %>
         <p><%= user.email %></p>
+        <div class="item">
+            <%= link_to 'メッセージ', conversations_path(sender_id: current_user.id, recipient_id: user.id), method: 'post'%>
+          </div>
 
+        </li>
       </div>
 
   <% end %>
