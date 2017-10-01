@@ -15,10 +15,7 @@ class UpsController < ApplicationController
       else
         @ups = Up.all
         @up = Up.new
-        respond_to do |format|
-          format.html
-          format.js
-        end
+      
     end
   end
 
@@ -26,6 +23,7 @@ class UpsController < ApplicationController
     def show
        @comment = @up.comments.build
        @comments = @up.comments
+       Notification.find(params[:notification_id]).update(read: true) if params[:notification_id]
     end
 
     def new

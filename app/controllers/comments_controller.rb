@@ -5,11 +5,21 @@ class CommentsController < ApplicationController
     @comment = current_user.comments.build(comment_params)
     @up = @comment.up
     # クライアント要求に応じてフォーマットを変更
+  @notification = @comment.notifications.build(user_id: @up.user.id )
     respond_to do |format|
       if @comment.save
         format.html { redirect_to up_path(@up), notice: 'コメントを投稿しました。' }
-         format.js { render :index }
-      else
+        format.js { render :index }
+        unless @comment.up.user_id == current_user.id
+        Pusher.trigger("user_#{@comment.up.user_id}_channel", 'comment_created', {
+                 message: 'あなたの投稿にコメントが付きました'
+               })
+
+        end
+        Pusher.trigger("user_#{@comment.up.user_id}_channel", 'notification_created', {
+                unread_counts: Notification.where(user_id: @comment.up.user.id, read: false).count
+              })
+     else
         format.html { render :new }
       end
     end
