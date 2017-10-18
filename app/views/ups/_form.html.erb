@@ -22,7 +22,7 @@
 
   <p class="post-image"><%= image_tag(@up.photo) %></p>
   <%= f.label :写真 %>
-  <%= f.file_field :photo %>
+  <%= f.file_field :photo,accept: "image/jpeg" %>
   <%= f.hidden_field :photo_cache %>
   <br>
   <%= f.submit '投稿', class: 'btn btn-primary btn-block' %>
