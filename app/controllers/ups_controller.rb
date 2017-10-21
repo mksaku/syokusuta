@@ -8,6 +8,7 @@ class UpsController < ApplicationController
        if params[:back]
          @ups = Up.all
          @up = Up.new(ups_params)
+          Notification.find(params[:notification_id]).update(read: true) if params[:notification_id]
          respond_to do |format|
            format.html
            format.js
@@ -15,7 +16,9 @@ class UpsController < ApplicationController
       else
         @ups = Up.all
         @up = Up.new
-      
+         Notification.find(params[:notification_id]).update(read: true) if params[:notification_id]
+
+
     end
   end
 

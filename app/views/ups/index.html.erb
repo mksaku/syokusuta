@@ -28,8 +28,12 @@
       <br>
 
       <br>
+      <% if current_user.id == photo.user_id %>
       <%= link_to "編集", edit_up_path(photo.id), class: 'btn btn-default btn-sm btn-success' %>
       <%= link_to "削除", up_path(photo.id), method: :delete, data: { confirm: '本当に削除していいですか？'}, class: 'btn btn-default btn-sm btn btn-danger' %>
+
+      <% end %>
+
 
     </div>
     </div>
