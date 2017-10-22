@@ -81,7 +81,7 @@ class UpsController < ApplicationController
     private
       def ups_params
         @ups = Up.all
-        params.require(:up).permit(:content,:photo)
+        params.require(:up).permit(:content,:photo,:title)
       end
 
       def set_up
