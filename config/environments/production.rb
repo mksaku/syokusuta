@@ -79,7 +79,7 @@ Rails.application.configure do
 
 
 #config.action_mailer.default_url_options = { host: 'glacial-coast-32397.herokuapp.com' }
-config.action_mailer.default_url_options = { host: '13.115.31.126' }
+config.action_mailer.default_url_options = { host: '52.68.16.56' }
 ActionMailer::Base.delivery_method = :smtp
 ActionMailer::Base.smtp_settings =
 {
