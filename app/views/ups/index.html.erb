@@ -3,8 +3,10 @@
     <div class="header">
     <p><%= notice %></p>
 
-
-      <%= link_to "新規投稿", new_up_path, class: 'btn btn-default' %>
+<div class="post_topic">
+  投稿しよう
+<%= render 'form' %>
+</div>
     </div>
     <br>
     <% @ups.each do |photo| %>
