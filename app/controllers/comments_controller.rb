@@ -25,6 +25,19 @@ class CommentsController < ApplicationController
     end
   end
 
+    def edit
+      @comment = Comment.find(params[:id])
+    end
+
+
+  def update
+        @comment = Comment.find(params[:id])
+        if @comment.update(comment_params)
+            redirect_to up_path(@comment.up_id), notice: 'コメントが修正されました'
+        else
+            render 'edit'
+        end
+  end
 
 
 
