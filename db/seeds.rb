@@ -20,6 +20,13 @@ uid: SecureRandom.uuid,
 )
 user.skip_confirmation!
 user.save
+title = Faker::Book.title
+ content = Faker::Beer.name
+ Up.create!(title: title,
+              content: content,
+              user_id: user.id
+             )
+
 end
 
 30.times do
@@ -32,17 +39,10 @@ end
     follower_id: follower_id,
     followed_id: followed_id
   )
-end
-
-60.times do |t|
- title = Faker::Book.title
-  content = Faker::Beer.name
-  Up.create!(title: title,
-               content: content,
-               user_id: user_id,
-              )
 
 end
+
+
 
 20.times do |p|
   content = Faker::Bank.name
