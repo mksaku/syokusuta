@@ -1,0 +1,34 @@
+
+
+
+<%= form_for(@up)  do |f| %>
+<%#<%= form_for(@up) do |f| %>
+　  <% if @up.errors.any? %>
+    <div id="error_explanation">
+
+      <h2><%= @up.errors.count %>件のエラーがあります。</h2>
+
+      <ul>
+     <% @up.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+  <div class="user_info">  <%= profile_img(current_user) %></div>
+  <%= f.label :title %>
+  <%= f.text_field :title, class: 'form-control' %>
+
+  <div class="input-mysize">
+    <%= f.label :content %>
+    <%= f.text_area :content, class: 'form-control' , :size => 400 %>
+  </div>
+
+
+  <p class="post-image"><%= image_tag(@up.photo) %></p>
+  <%= f.label :写真 %>
+  <%= f.file_field :photo,accept: "image/jpeg" %>
+  <%= f.hidden_field :photo_cache %>
+  <br>
+  <%= f.submit '投稿', class: 'btn btn-primary btn-block' %>
+<% end %>
