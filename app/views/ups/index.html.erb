@@ -1,76 +1,54 @@
 <div class="container">
   <div class="wrapper col-md-8 col-md-offset-2 col-sm-10">
     <div class="header">
-    <p><%= notice %></p>
-
-<div class="post_topic">
-  投稿しよう
-<%= render 'form' %>
-</div>
-<br>
-<br>
-<div>
-  <%= search_form_for @search do |f| %>
-  <%= f.label :title_or_content, '検索:' %>
-  <%= f.text_field :title_or_content %>
-  <%= f.submit 'SEARCH' %>
-
-  <% end %>
-  </div>
-
+      <p><%= notice %></p>
+      <div class="post_topic">投稿しよう
+        <%= render 'form' %>
+      </div>
+      <br>
+      <br>
+      <div>
+        <%= search_form_for @search do |f| %>
+          <%= f.label :title_or_content, '検索:' %>
+          <%= f.text_field :title_or_content %>
+          <%= f.submit 'SEARCH' %>
+        <% end %>
+      </div>
     </div>
     <br>
-
-
-
-
-
-
-
-<% if @events.any? %>
-<% @ups.each do |photo| %>
-
-<div class="row">
-  <div class="post_t">
-
-    <div class="pull-left">
-       <div class="user_info"><%= profile_img(photo.user) %></div>
-       <p><%= photo.user.name %></p>
-
-    </div>
-    <%= link_to up_path(photo.id) do %>
-   <h4><div class="pull-left"><p><%= photo.title %></p></div></h4>
- <% end %>
-
-
-<br>
-<div class="pull-left"><p><%= photo.content %></p></div>
-
-  <p class="post-image"><%= image_tag(photo.photo) %></p>
-  <br>
-
-  <br>
-
-  <% if Like.find_by(user_id: @current_user.id, up_id: photo.id) %>
-  　<%= link_to("/likes/#{photo.id}/destroy", {method: "up"}) do %>
-      　<span class="fa fa-heart like-btn-unlike"></span>
-      <% end %>
-   <% else %>
-   　<%= link_to("/likes/#{photo.id}/create", {method: "up"}) do %>
-         <span class="fa fa-heart like-btn"></span>
-       <% end %>
-   <% end %>
-    <%= Like.where(up_id: Up.find_by(id: photo.id)).count %>
-
-
-
-  <% if current_user.id == photo.user_id %>
-  <%= link_to "編集", edit_up_path(photo.id), class: 'btn btn-default btn-sm btn-success' %>
-  <%= link_to "削除", up_path(photo.id), method: :delete, data: { confirm: '本当に削除していいですか？'}, class: 'btn btn-default btn-sm btn btn-danger' %>
-
-  <% end %>
-
-  <% end %>
+    <% if @events.any? %>
+      <% @search_articles.each do |photo| %>
+        <div class="row">
+          <div class="post_t">
+            <div class="pull-left">
+              <div class="user_info"><%= profile_img(photo.user) %> </div>
+              <p><%= photo.user.name %></p>
+            </div>
+            <%= link_to up_path(photo.id) do %>
+              <h4><div class="pull-left"><p><%= photo.title %></p></div></h4>
+            <% end %>
+            <br>
+            <div class="pull-left"><p><%= photo.content %></p></div>
+            <p class="post-image"><%= image_tag(photo.photo) %></p>
+            <br>
+            <br>
+            <% if Like.find_by(user_id: @current_user.id, up_id: photo.id) %>
+              <%= link_to("/likes/#{photo.id}/destroy", {method: "up"}) do %>
+                <span class="fa fa-heart like-btn-unlike"></span>
+              <% end %>
+            <% else %>
+              <%= link_to("/likes/#{photo.id}/create", {method: "up"}) do %>
+              <span class="fa fa-heart like-btn"></span>
+            <% end %>
+          <% end %>
+          <%= Like.where(up_id: Up.find_by(id: photo.id)).count %>
+          <% if current_user.id == photo.user_id %>
+            <%= link_to "編集", edit_up_path(photo.id), class: 'btn btn-default btn-sm btn-success' %>
+            <%= link_to "削除", up_path(photo.id), method: :delete, data: { confirm: '本当に削除していいですか？'}, class: 'btn btn-default btn-sm btn btn-danger' %>
+          <% end %>
+        </div>
+      </div>
+    <% end %>
 
 
 
@@ -82,7 +60,7 @@
 
 
 <% if @events.nil? %>
-    <div>
+
   <ul class="nav nav-tabs" role="tablist">
     <li class="active" role="presentation">
       <a aria-controls="tab_a" data-toggle="tab" href="#tab_a" role="tab">新しい順</a>
@@ -94,125 +72,89 @@
   </ul>
   <div class="tab-content">
     <div class="tab-pane active" id="tab_a" role="tabpanel">
-      <p>
-        <% @ups.each do |photo| %>
-
-        <div class="row">
+      <p><div class="row">
           <div class="post_t">
-
             <div class="pull-left">
-               <div class="user_info"><%= profile_img(photo.user) %></div>
-               <p><%= photo.user.name %></p>
-
-            </div>
-            <%= link_to up_path(photo.id) do %>
-           <h4><div class="pull-left"><p><%= photo.title %></p></div></h4>
-         <% end %>
-
-
-    <br>
-    <div class="pull-left"><p><%= photo.content %></p></div>
-
-          <p class="post-image"><%= image_tag(photo.photo) %></p>
-          <br>
-
-          <br>
-
-          <% if Like.find_by(user_id: @current_user.id, up_id: photo.id) %>
-          　<%= link_to("/likes/#{photo.id}/destroy", {method: "up"}) do %>
-              　<span class="fa fa-heart like-btn-unlike"></span>
-              <% end %>
-           <% else %>
-           　<%= link_to("/likes/#{photo.id}/create", {method: "up"}) do %>
-                 <span class="fa fa-heart like-btn"></span>
-               <% end %>
-           <% end %>
-            <%= Like.where(up_id: Up.find_by(id: photo.id)).count %>
-
-
-
-          <% if current_user.id == photo.user_id %>
-          <%= link_to "編集", edit_up_path(photo.id), class: 'btn btn-default btn-sm btn-success' %>
-          <%= link_to "削除", up_path(photo.id), method: :delete, data: { confirm: '本当に削除していいですか？'}, class: 'btn btn-default btn-sm btn btn-danger' %>
-
-          <% end %>
-
-
-        </div>
-        </div>
-        <br>
-        <br>
-    <% end %>
-
-      </p>
-    </div>
-    <div class="tab-pane" id="tab_b" role="tabpanel">
-      <p>
-        評価がないものは表示されません。
-        <% @ranks.each do |photo| %>
-
-                <div class="row">
-                  <div class="post_t">
-
-                    <div class="pull-left">
-                       <div class="user_info"><%= profile_img(photo.user) %></div>
-                       <p><%= photo.user.name %></p>
-
-                    </div>
-                    <%= link_to up_path(photo.id) do %>
-                   <h4><div class="pull-left"><p><%= photo.title %></p></div></h4>
-                 <% end %>
-
-
-            <br>
-            <div class="pull-left"><p><%= photo.content %></p></div>
-
-                  <p class="post-image"><%= image_tag(photo.photo) %></p>
-                  <br>
-
-                  <br>
-
-                  <% if Like.find_by(user_id: @current_user.id, up_id: photo.id) %>
-                  　<%= link_to("/likes/#{photo.id}/destroy", {method: "up"}) do %>
-                      　<span class="fa fa-heart like-btn-unlike"></span>
-                      <% end %>
-                   <% else %>
-                   　<%= link_to("/likes/#{photo.id}/create", {method: "up"}) do %>
-                         <span class="fa fa-heart like-btn"></span>
-                       <% end %>
-                   <% end %>
-
-                   <%= Like.where(up_id: Up.find_by(id: photo.id)).count %>
-
-
-
-
-                  <% if current_user.id == photo.user_id %>
-                  <%= link_to "編集", edit_up_path(photo.id), class: 'btn btn-default btn-sm btn-success' %>
-                  <%= link_to "削除", up_path(photo.id), method: :delete, data: { confirm: '本当に削除していいですか？'}, class: 'btn btn-default btn-sm btn btn-danger' %>
-
-                  <% end %>
-
-
+              <% @ups.each do |photo| %>
+                <div class="user_info"><%= profile_img(photo.user) %> </div>
+                  <p><%= photo.user.name %></p>
                 </div>
-                </div>
+                <%= link_to up_path(photo.id) do %>
+                  <h4><div class="pull-left"><p><%= photo.title %></p></div></h4>
+                <% end %>
                 <br>
-
+                <div class="pull-left"><p><%= photo.content %></p></div>
+                <p class="post-image"><%= image_tag(photo.photo) %></p>
+                <br>
+                <br>
+                <% if Like.find_by(user_id: @current_user.id, up_id: photo.id) %>
+                 <%= link_to("/likes/#{photo.id}/destroy", {method: "up"}) do %>
+                   <span class="fa fa-heart like-btn-unlike"></span>
+                  <% end %>
+                <% else %>
+                  <%= link_to("/likes/#{photo.id}/create", {method: "up"}) do %>
+                  <span class="fa fa-heart like-btn"></span>
+                <% end %>
+              <% end %>
+              <%= Like.where(up_id: Up.find_by(id: photo.id)).count %>
+              <% if current_user.id == photo.user_id %>
+                <%= link_to "編集", edit_up_path(photo.id), class: 'btn btn-default btn-sm btn-success' %>
+                <%= link_to "削除", up_path(photo.id), method: :delete, data: { confirm: '本当に削除していいですか？'}, class: 'btn btn-default btn-sm btn btn-danger' %>
+              <% end %>
+            </div>
+          </div>
+          <br>
+          <br>
+        <% end %>
+      </p>
+    </div></div>
+    <div class="tab-pane" id="tab_b" role="tabpanel">
+      <p>評価がないものは表示されません。
+        <% @ranks.each do |photo| %>
+          <div class="row">
+            <div class="post_t">
+              <div class="pull-left">
+                <div class="user_info"><%= profile_img(photo.user) %> </div>
+                <p><%= photo.user.name %></p>
+              </div>
+              <%= link_to up_path(photo.id) do %>
+                <h4><div class="pull-left"><p><%= photo.title %></p></div></h4>
+              <% end %>
+              <br>
+              <div class="pull-left"><p><%= photo.content %></p></div>
+              <p class="post-image"><%= image_tag(photo.photo) %></p>
+              <br>
+              <br>
+              <% if Like.find_by(user_id: @current_user.id, up_id: photo.id) %>
+                <%= link_to("/likes/#{photo.id}/destroy", {method: "up"}) do %>
+                 <span class="fa fa-heart like-btn-unlike"></span>
+                <% end %>
+              <% else %>
+                <%= link_to("/likes/#{photo.id}/create", {method: "up"}) do %>
+                  <span class="fa fa-heart like-btn"></span>
+                <% end %>
+              <% end %>
+              <%= Like.where(up_id: Up.find_by(id: photo.id)).count %>
+              <% if current_user.id == photo.user_id %>
+                <%= link_to "編集", edit_up_path(photo.id), class: 'btn btn-default btn-sm btn-success' %>
+                <%= link_to "削除", up_path(photo.id), method: :delete, data: { confirm: '本当に削除していいですか？'}, class: 'btn btn-default btn-sm btn btn-danger' %>
+              <% end %>
+            </div>
+          </div>
+          <br>
         <% end %>
       </p>
     </div>
   </div>
 </div>
 
-</div>
-</div>
 <% end %>
 
 
 <div id="page-top-btn" class="page-top-btn">
  <p><a class="move-page-top" id="move-page-top">▲</a></p>
 </div>
-
+<% end %>
 <br>
 <br>
 <br>

@@ -20,8 +20,8 @@ class UpsController < ApplicationController
 
 
 
-          @events = @search.result.order("created_at ASC")
-        
+          @events = @search.result
+
 
 
 
@@ -37,6 +37,8 @@ class UpsController < ApplicationController
                    @ids = Like.group(:up_id).order('count(up_id) DESC').pluck(:up_id)
                    @find = Up.find(@ids)
                    @ranks = @ids.collect {|id| @find.detect {|x| x.id == id.to_i}}
+                   @events = @search.result
+
 
 
     end
