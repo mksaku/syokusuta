@@ -4,13 +4,6 @@ class ApplicationController < ActionController::Base
   protect_from_forgery with: :exception
   before_action :configure_permitted_parameters, if: :devise_controller?
   before_action :current_notifications, if: :signed_in?
-  before_filter :set_search
-
-  def set_search
-    #@search = Article.search(params[:q])
-    @search = Up.ransack(params[:q]) #ransackメソッド推奨
-    @search_articles = @search.result.page(params[:page])
-  end
 
 
 

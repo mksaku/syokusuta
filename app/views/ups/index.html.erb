@@ -8,16 +8,18 @@
       <br>
       <br>
       <div>
-        <%= search_form_for @search do |f| %>
-          <%= f.label :title_or_content, '検索:' %>
-          <%= f.text_field :title_or_content %>
-          <%= f.submit 'SEARCH' %>
-        <% end %>
+        <li>
+       <%= search_form_for @search, url: ups_path do |f| %>
+       <%= f.text_field :title_or_content,placeholder: '検索するテキストを入力...' %>
+       <%= f.submit ("検索") , class: 'search-btn'%>
+       <% end %>
+
+        </li>
       </div>
     </div>
     <br>
     <% if @events.any? %>
-      <% @search_articles.each do |photo| %>
+      <% @events.each do |photo| %>
         <div class="row">
           <div class="post_t">
             <div class="pull-left">

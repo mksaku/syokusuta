@@ -4,7 +4,9 @@ class UpsController < ApplicationController
     before_action :set_up, only: [:edit, :update, :destroy, :show]
     before_filter :set_search
     def set_search
-      @search = Up.ransack(params[:q])
+      #@search = Article.search(params[:q])
+      @search = Up.ransack(params[:q]) #ransackメソッド推奨
+      @events = @search.result
     end
 
     def index
@@ -20,7 +22,7 @@ class UpsController < ApplicationController
 
 
 
-          @events = @search.result
+
 
 
 
