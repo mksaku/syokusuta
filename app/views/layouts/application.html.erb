@@ -48,13 +48,6 @@
     <!-- Collect the nav links, forms, and other content for toggling -->
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
       <ul class="nav navbar-nav navbar-right">
-        <li>
-       <%= search_form_for @search, url: application_search_path do |f| %>
-       <%= f.text_field :title_or_content,placeholder: '検索するテキストを入力...' %>
-       <%= f.submit ("検索") , class: 'search-btn'%>
-       <% end %>
-
-        </li>
         <%= link_to "投稿", new_up_path , class: "navbar-brand"%>
         <li>
           <%= link_to notifications_index_path, class: "navbar-brand" do %>

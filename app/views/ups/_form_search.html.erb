@@ -1,0 +1,34 @@
+
+
+
+<%= form_for(@serch_articles)  do |f| %>
+<%#<%= form_for(@serch_articles) do |f| %>
+　  <% if @serch_articles.errors.any? %>
+    <div id="error_explanation">
+
+      <h2><%= @serch_articles.errors.count %>件のエラーがあります。</h2>
+
+      <ul>
+     <% @serch_articles.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+  <div class="user_info">  <%= profile_img(current_user) %></div>
+  <%= f.label :title %>
+  <%= f.text_field :title, class: 'form-control' %>
+
+  <div class="input-mysize">
+    <%= f.label :content %>
+    <%= f.text_area :content, class: 'form-control' , :size => 400 %>
+  </div>
+
+
+  <p class="post-image"><%= image_tag(@serch_articles.photo) %></p>
+  <%= f.label :写真 %>
+  <%= f.file_field :photo,accept: "image/jpeg" %>
+  <%= f.hidden_field :photo_cache %>
+  <br>
+  <%= f.submit '投稿', class: 'btn btn-primary btn-block' %>
+<% end %>

@@ -9,7 +9,7 @@ Rails.application.routes.draw do
   mount RailsAdmin::Engine => '/admin', as: 'rails_admin'
 
   #get 'ups/index'
-  get 'application/search'
+  get 'ups/search'
  get 'ups' => 'ups#index'
   resources :ups do
     resources :comments

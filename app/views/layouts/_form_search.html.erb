@@ -1,15 +1,15 @@
 
 
 
-<%= form_for(@up)  do |f| %>
-<%#<%= form_for(@up) do |f| %>
-　  <% if @up.errors.any? %>
+<%= form_for(@serch_articles)  do |f| %>
+<%#<%= form_for(@serch_articles) do |f| %>
+　  <% if @serch_articles.errors.any? %>
     <div id="error_explanation">
 
-      <h2><%= @up.errors.count %>件のエラーがあります。</h2>
+      <h2><%= @serch_articles.errors.count %>件のエラーがあります。</h2>
 
       <ul>
-     <% @up.errors.full_messages.each do |msg| %>
+     <% @serch_articles.errors.full_messages.each do |msg| %>
         <li><%= msg %></li>
       <% end %>
       </ul>
@@ -25,7 +25,7 @@
   </div>
 
 
-  <p class="post-image"><%= image_tag(@up.photo) %></p>
+  <p class="post-image"><%= image_tag(@serch_articles.photo) %></p>
   <%= f.label :写真 %>
   <%= f.file_field :photo,accept: "image/jpeg" %>
   <%= f.hidden_field :photo_cache %>
