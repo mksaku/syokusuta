@@ -2,7 +2,13 @@ class UpsController < ApplicationController
 
     before_action :authenticate_user!
     before_action :set_up, only: [:edit, :update, :destroy, :show]
-    before_filter :search
+    before_filter :before_search
+    def before_search
+          #@search = Article.search(params[:q])
+          @search = Up.ransack(params[:q]) #ransackメソッド推奨
+          @serch_articles = @search.result
+    end
+
     def search
       #@search = Article.search(params[:q])
       @search = Up.ransack(params[:q]) #ransackメソッド推奨
