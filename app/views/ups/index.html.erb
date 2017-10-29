@@ -13,6 +13,7 @@
 </div>
 <br>
 <br>
+
 <div>
   <%= search_form_for @search do |f| %>
   <%= f.label :title_or_content, '検索:' %>
@@ -24,6 +25,28 @@
 
     <br>
     <div>
+
+
+
+<% if @result.any? %>
+<% @result.each do |photo| %>
+
+<div class="row">
+  <div class="post_t">
+
+    <div class="pull-left">
+       <div class="user_info"><%= profile_img(photo.user) %></div>
+       <p><%= photo.user.name %></p>
+
+    </div>
+    <%= link_to up_path(photo.id) do %>
+   <h4><div class="pull-left"><p><%= photo.title %></p></div></h4>
+ <% end %>
+
+<% end %>
+
+
+<% if @result.nil? %>
   <ul class="nav nav-tabs" role="tablist">
     <li class="active" role="presentation">
       <a aria-controls="tab_a" data-toggle="tab" href="#tab_a" role="tab">新しい順</a>
@@ -140,11 +163,12 @@
                 <br>
 
         <% end %>
+        <% end %>
+        
       </p>
     </div>
   </div>
 </div>
-
 
 
 <div id="page-top-btn" class="page-top-btn">

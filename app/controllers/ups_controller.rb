@@ -21,6 +21,7 @@ class UpsController < ApplicationController
 
 
           @events = @search.result.order("created_at ASC")
+        
 
 
 
