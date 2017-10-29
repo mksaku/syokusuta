@@ -2,6 +2,10 @@ class UpsController < ApplicationController
 
     before_action :authenticate_user!
     before_action :set_up, only: [:edit, :update, :destroy, :show]
+    before_filter :set_search
+    def set_search
+      @search = Up.ransack(params[:q])
+    end
 
     def index
 
@@ -9,6 +13,17 @@ class UpsController < ApplicationController
          @ups = Up.all
          @up = Up.new(ups_params)
           Notification.find(params[:notification_id]).update(read: true) if params[:notification_id]
+
+          @ids = Like.group(:up_id).order('count(up_id) DESC').pluck(:up_id)
+          @find = Up.find(@ids)
+          @ranks = @ids.collect {|id| @find.detect {|x| x.id == id.to_i}}
+
+
+
+          @events = @search.result.order("created_at ASC")
+
+
+
          respond_to do |format|
            format.html
            format.js
@@ -18,12 +33,21 @@ class UpsController < ApplicationController
         @up = Up.new
          Notification.find(params[:notification_id]).update(read: true) if params[:notification_id]
 
+                   @ids = Like.group(:up_id).order('count(up_id) DESC').pluck(:up_id)
+                   @find = Up.find(@ids)
+                   @ranks = @ids.collect {|id| @find.detect {|x| x.id == id.to_i}}
+
 
     end
   end
 
 
     def show
+      @up_like = Up.find_by(id: params[:id])
+    @user = @up_like.user
+      #変数@likes_countを定義
+     @likes_count = Like.where(up_id: @up_like.id).count
+
        @comment = @up.comments.build
        @comments = @up.comments
        Notification.find(params[:notification_id]).update(read: true) if params[:notification_id]

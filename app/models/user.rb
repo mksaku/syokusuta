@@ -11,9 +11,11 @@ class User < ActiveRecord::Base
   has_many :reverse_relationships, foreign_key: "followed_id", class_name: "Relationship", dependent: :destroy
   has_many :followed_users, through: :relationships, source: :followed
   has_many :followers, through: :reverse_relationships, source: :follower
-  
-  mount_uploader :avatar, AvatarUploader
 
+  mount_uploader :avatar, AvatarUploader
+  # いいね機能のアソシエーション
+   has_many :likes, dependent: :destroy
+   has_many :like_ups, through: :likes, source: :up
 
   def self.find_for_facebook_oauth(auth, signed_in_resource=nil)
       user = User.find_by(provider: auth.provider, uid: auth.uid)

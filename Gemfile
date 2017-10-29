@@ -27,6 +27,7 @@ gem 'fog'
 gem 'dotenv-rails'
 gem 'unicorn'
 gem 'therubyracer', platforms: :ruby
+gem 'ransack'
 
 #主に開発用に使用するライブラリを定義する(本番では使用しない)
 group :development do

@@ -5,4 +5,7 @@ class Up < ActiveRecord::Base
  # CommentモデルのAssociationを設定
  has_many :comments, dependent: :destroy
   mount_uploader :photo, PhotoUploader
+
+  has_many :likes, dependent: :destroy
+  has_many :liking_users, through: :likes, source: :user
 end

@@ -84,5 +84,8 @@ end
   #     # (app/controllers/admin/products_controller.rb)
   #     resources :products
   #   end
+post "likes/:up_id/create" => "likes#create"
+post "likes/:up_id/destroy" => "likes#destroy"
+
   root 'top#index'
 end

@@ -1,3 +1,10 @@
+
+<section class="main-header">
+    <img src="<%= asset_path "achieve.png" %>">
+  </section>
+
+
+
 <p class="flash"><%= notice %><%= alert %></p>
 <div class="col-md-6 col-sm-6">
 
@@ -5,8 +12,42 @@
   <h1>About This Application</h1>
 
   <p>
-     Rails研修用アプリケーション
-     アプリトップページ
+    <% @ranks.each do |photo| %>
+
+            <div class="row">
+              <div class="post_t">
+
+                <div class="pull-left">
+                   <div class="user_info"><%= profile_img(photo.user) %></div>
+                   <p><%= photo.user.name %></p>
+
+                </div>
+                <%= link_to up_path(photo.id) do %>
+               <h4><div class="pull-left"><p><%= photo.title %></p></div></h4>
+             <% end %>
+
+
+        <br>
+        <div class="pull-left"><p><%= photo.content %></p></div>
+
+              <p class="post-image"><%= image_tag(photo.photo) %></p>
+              <br>
+
+              <br>
+
+
+                  　<span class="fa fa-heart like-btn-unlike"></span>
+
+               <%= Like.where(up_id: Up.find_by(id: photo.id)).count %>
+
+             </div>
+             </div>
+             <br>
+
+
+      <% end %>
+
+
   </p>
 </section>
 </div>
