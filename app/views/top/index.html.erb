@@ -9,7 +9,7 @@
 <div class="col-md-6 col-sm-6">
 
 <section class="about">
-  <h1>About This Application</h1>
+  <h1>◆評価の高い食スタ　Best5</h1>
 
   <p>
     <% @ranks.each do |photo| %>
@@ -46,7 +46,7 @@
 
 
       <% end %>
-
+      <%= link_to "登録してもっと投稿を見る", new_user_registration_path, class: 'btn btn-default btn-sm btn-primary' %>
 
   </p>
 </section>
@@ -54,7 +54,30 @@
 <div class="col-md-6 col-sm-6">
 <section class="function">
  <div class="pull-left">
- <img src="<%= asset_path "topimage.jpg" %>" class="home-image" >
+<h2>あ、この料理、みんなに広めたい</h2>
+<h2>写真メインで料理を調べたい。</h2>
+<br>
+<p>友人とランチ中、恋人とのデートの企画中etc……<br>
+貴方はふとそう思ったことはありませんか？<br>
+このサイトは、そんな思いを叶える投稿サイト「Syokustagram」です。</p>
+
+<p>
+◆料理を広めたい人<br>
+貴方の広めたい料理たちを「食スタ」として投稿しましょう。<br>
+ログインしているユーザが評価、コメントをしてくれます。<br>
+<br>
+◆料理を調べたい人<br>
+調べたいワードで検索しましょう。<br>
+きっと素敵な料理が見つかります。<br>
+</p>
+
+<p>
+基本的には登録ユーザにしか投稿は見ることができませんが、<br>
+評価の高い食スタは、ログインしていないユーザにも公開されます。<br></p>
+
+<br>
+<h2><%= link_to "さあ、貴方も食スタを投稿して料理を世界に広めましょう！", new_user_registration_path %></h2>
+
  </div>
 </section>
 </div>

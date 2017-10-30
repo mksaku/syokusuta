@@ -9,6 +9,7 @@
     </div>
     <br>
     <p>
+            <h2>検索結果</h2>
             <% @serch_articles.each do |photo| %>
             <div class="row">
                 <div class="post_t">
@@ -41,9 +42,11 @@
 </div>
 </div>
               <% end %>
+<br>
 
-        <br>
-        <br>
+<%= link_to "一覧へ戻る", ups_path, class: 'btn btn-default btn-sm btn-primary' %>
+<br>
+<br>
 
     </p>
 
