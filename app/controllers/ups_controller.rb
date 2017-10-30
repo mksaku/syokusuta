@@ -70,6 +70,7 @@ class UpsController < ApplicationController
         @ups = Up.all
         @up = Up.new(ups_params)
 
+
      else
        @ups = Up.all
        @up = Up.new
@@ -81,6 +82,9 @@ class UpsController < ApplicationController
       @ups = Up.all
       @up=Up.new(ups_params)
       @up.user_id = current_user.id
+      @ids = Like.group(:up_id).order('count(up_id) DESC').pluck(:up_id)
+      @find = Up.find(@ids)
+      @ranks = @ids.collect {|id| @find.detect {|x| x.id == id.to_i}}
       if @up.save
 
         redirect_to ups_path, notice: "投稿しました！"
