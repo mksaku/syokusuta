@@ -1,7 +1,7 @@
 class UpsController < ApplicationController
 
     before_action :authenticate_user!
-    before_action :set_up, only: [:edit, :update, :destroy, :show]
+    before_action :set_up, only: [:edit, :update, :destroy, :show, :create]
     before_filter :before_search
     def before_search
           #@search = Article.search(params[:q])
@@ -29,11 +29,6 @@ class UpsController < ApplicationController
 
 
 
-
-
-
-
-
          respond_to do |format|
            format.html
            format.js
@@ -43,10 +38,10 @@ class UpsController < ApplicationController
         @up = Up.new
          Notification.find(params[:notification_id]).update(read: true) if params[:notification_id]
 
-                   @ids = Like.group(:up_id).order('count(up_id) DESC').pluck(:up_id)
-                   @find = Up.find(@ids)
-                   @ranks = @ids.collect {|id| @find.detect {|x| x.id == id.to_i}}
-                   @events = @search.result
+        @ids = Like.group(:up_id).order('count(up_id) DESC').pluck(:up_id)
+        @find = Up.find(@ids)
+        @ranks = @ids.collect {|id| @find.detect {|x| x.id == id.to_i}}
+        @events = @search.result
 
 
 
@@ -79,7 +74,7 @@ class UpsController < ApplicationController
     end
 
     def create
-      @ups = Up.all
+
       @up=Up.new(ups_params)
       @up.user_id = current_user.id
       @ids = Like.group(:up_id).order('count(up_id) DESC').pluck(:up_id)
